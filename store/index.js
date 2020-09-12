@@ -8,9 +8,11 @@ const createStore = () =>
       menuIsActive: false,
       menuInitial: true,
       blogPosts: [],
+      recipePosts: [],
       allPages: [],
       navheight: 60,
       blogTitle: '',
+      recipeTitle: '',
       siteInfo: [],
       connect: [],
       allTags: [],
@@ -30,6 +32,7 @@ const createStore = () =>
       async nuxtServerInit({ dispatch }) {
         await dispatch('getSiteInfo')
         await dispatch('getBlogPosts')
+        await dispatch('getRecipePosts')
         await dispatch('getPages')
         await dispatch('getCats')
       },
@@ -39,6 +42,19 @@ const createStore = () =>
         const searchposts = await context.keys().map(key => ({
           ...context(key),
           _path: `/blog/${key.replace('.json', '').replace('./', '')}`
+        }));
+
+
+
+        commit('SET_POSTS', searchposts.reverse())
+
+      },
+      async getRecipePosts({ state, commit }) {
+        const context = await require.context('~/content/recipe/posts/', false, /\.json$/);
+
+        const searchposts = await context.keys().map(key => ({
+          ...context(key),
+          _path: `/recipe/${key.replace('.json', '').replace('./', '')}`
         }));
 
 
@@ -100,14 +116,19 @@ const createStore = () =>
         const info = require('~/content/setup/info.json');
         const connect = require('~/content/setup/connect.json');
         const context = require.context('~/content/blog/posts/', false, /\.json$/);
+        const context = require.context('~/content/recipe/posts/', false, /\.json$/);
 
         const searchposts = context.keys().map(key => ({
           ...context(key),
           _path: `/blog/${key.replace('.json', '').replace('./', '')}`
         }));
 
+        const searchposts = context.keys().map(key => ({
+          ...context(key),
+          _path: `/recipe/${key.replace('.json', '').replace('./', '')}`
+        }));
 
-
+        commit('SET_RECIPES', searchposts)
         commit('SET_POSTS', searchposts)
         commit('SET_INFO', info)
         commit('SET_CONNECT', connect)
@@ -117,6 +138,9 @@ const createStore = () =>
     mutations: {
       SET_POSTS(state, data) {
         state.blogPosts = data
+      },
+      SET_RECIPES(state, data) {
+        state.recipePosts = data
       },
       SET_PAGES(state, data) {
         state.allPages = data
@@ -150,6 +174,9 @@ const createStore = () =>
       },
       SET_TITLE(state, data) {
         state.blogTitle = data
+      },
+      SET_RECIPETITLE(state, data) {
+        state.recipeTitle = data
       },
       SET_NAVHEIGHT(state, data) {
         state.navheight = data
