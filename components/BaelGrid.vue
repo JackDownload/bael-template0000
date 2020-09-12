@@ -5,7 +5,7 @@
       <div v-if="items2[pi]" v-for="(p,pi) in items2" :key="p.pi" class="xs-border xs-p2 bcg-item">
         <div class="item xs-block xs-full-height xs-flex">
           <nuxt-link class="xs-text-center xs-flex xs-full-height xs-flex-align-center xs-flex-justify-center xs-text-center" :to="p._path">
-            {{p.title}}
+            {{p.title}} és  {{p.thumbnail}}
           </nuxt-link>
         </div>
       </div>
