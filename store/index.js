@@ -8,6 +8,7 @@ const createStore = () =>
       menuIsActive: false,
       menuInitial: true,
       blogPosts: [],
+      blogRecipes: [],
       allPages: [],
       navheight: 60,
       blogTitle: '',
