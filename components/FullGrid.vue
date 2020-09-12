@@ -6,7 +6,7 @@
         <div v-if="p.thumbnail" class="item xs-block xs-full-height xs-flex xs-relative xs-flex-align-start xs-flex-justify-end xs-text-left">
                     <div class="xs-text-left xs-flex xs-full-height xs-flex-justify-end xs-flex-align-end xs-width-auto">
       <nuxt-link class="full-bg-link" :to="p._path">
-           {{p.title}}
+           {{p.title}} és  {{p.thumbnail}}
           </nuxt-link>
           </div>
           <nuxt-link  :to="p._path">
@@ -19,7 +19,7 @@
         </div>
                <div v-else class="item item-txt xs-block xs-full-height xs-flex xs-relative xs-flex-align-center xs-flex-justify-center xs-text-center">
      <nuxt-link class="nobg-link" :to="p._path">
-           {{p.title}}
+           {{p.title}} és  {{p.thumbnail}}
           </nuxt-link>
         
 
